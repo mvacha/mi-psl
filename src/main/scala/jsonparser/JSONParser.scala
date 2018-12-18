@@ -3,6 +3,9 @@ package jsonparser
 import scala.util.parsing.combinator.{JavaTokenParsers, RegexParsers}
 
 class JSONParser extends JavaTokenParsers {
+
+  println ("");
+
   def value : Parser[JValue] = (
       obj
     | array
@@ -41,7 +44,7 @@ class JSONParser extends JavaTokenParsers {
 
   def exp : Parser[String] = e ~ optToStr("-" | "+") ~ digits ^^ {case e1~e2~e3 => e1 + e2 + e3}
 
-  def frac : Parser[String] = "." ~ digits ^^ {case _ ~ n => "." + n}
+  def frac : Parser[String] = "." ~ (rep1("""[0-9]""".r) ^^ (_ mkString "")) ^^ {case _ ~ n => "." + n}
 
   def int : Parser[String] = "0" | digits
 

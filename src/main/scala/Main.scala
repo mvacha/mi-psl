@@ -44,9 +44,9 @@ object ParseJSON extends JSONParser {
         "408 111-6892"
       ]
     }
-  }""";
+  }"""
   def main(args: Array[String]) = {
-
-    println(parseAll(value, json))
+    val str = JSONPrinter.print(parseAll(value, json).get)
+    println(parseAll(value, str))
   }
 }

@@ -4,6 +4,8 @@ import jsonparser._
 
 class ParserTests extends FlatSpec with Matchers {
 
+
+
   val parser = new JSONParser()
 
   "JSONParser" should "parse null" in {
@@ -84,7 +86,7 @@ class ParserTests extends FlatSpec with Matchers {
         "408 111-6892"
       ]
     }
-  }""";
+  }"""
     val res = parser.parseAll(parser.obj, json)
     val expected = JObject(Map("address book" -> JObject(Map("name" -> JString("John Smith"), "address" -> JObject(Map("number" -> JNumber(1.2345), "city" -> JString("San Francisco, CA"), "zip" -> JNumber(94111.0), "null" -> JNull(), "bool" -> JBool(false), "street" -> JString("10 Market Street"))), "phone numbers" -> JArray(List(JString("408 338-4238"), JString("408 111-6892")))))))
     res.successful should be (true)
